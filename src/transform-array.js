@@ -1,6 +1,6 @@
 const CustomError = require("../extensions/custom-error");
 
-module.exports = function transform(/* arr */) {
+module.exports = function transform(arr) {
   //throw new CustomError('Not implemented');
   let res = []
   for(let j=0; j< arr.length; j++){

@@ -6,11 +6,11 @@ module.exports = class DepthCalculator {
     let res = 1
     function plus(array){
     for(let i=0; i<array.length; i++){
-      //console.log(arr[i])
       if(Array.isArray(array[i])){res ++
       plus(array[i])}
     }
   }
   plus(arr)
+  return res
   }
 };
