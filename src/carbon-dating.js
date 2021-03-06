@@ -8,4 +8,4 @@ module.exports = function dateSample(sampleActivity) {
   return Math.ceil(Math.log(MODERN_ACTIVITY / +sampleActivity) / (0.693 / HALF_LIFE_PERIOD))
   } else {return false}
 };
-//dont know 14+%
+//dont know 14%
