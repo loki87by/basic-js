@@ -1,19 +1,44 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function repeater(str, options) {
-  //throw new CustomError('Not implemented');
-  let additions = [str]
-  for(let i=0; i<options.additionRepeatTimes; i++){
-    if(options.addition){additions.push(options.addition)}
-    if(options.additionSeparator){additions.push(options.additionSeparator)}
+  let string = ''
+  let array = []
+  let newArr = []
+  function stringer(arg){
+    if(typeof arg !== 'string') {string = String(arg)
+    } else {string = arg}
   }
-  if(options.additionSeparator){additions.pop()}
-  if(options.separator){additions.push(options.separator)}
-  let res = []
-  for(let j=0; j<options.repeatTimes; j++){
-    res.push(...additions)
+  function repeater(word, num) {
+    for(let i=0; i<num; i++) {
+      array.push(word)
+    }
   }
-  res.pop()
-  return res.join('')
+  function separer(sep, arr) {
+    for(let i=1; i<arr.length; i++){
+      newArr.push(sep)
+      newArr.push(arr[i])
+    }
+  }
+  if(options.addition){stringer(options.addition)}
+  if(options.addition === false){stringer('false')}
+  if(options.addition === null){stringer('null')}
+  if(options.additionRepeatTimes){
+    let num = +options.additionRepeatTimes
+    repeater(string, num)
+  } else {repeater(string, 1)}
+  newArr.push(array[0])
+  if(options.additionSeparator){separer(options.additionSeparator, array)} 
+  if (!options.additionSeparator && options.additionRepeatTimes){separer('|', array)}
+  string = str + newArr.join('')
+  array = []
+  newArr = []
+  if(options.repeatTimes){
+    let num = +options.repeatTimes
+    repeater(string, num)
+  } else {repeater(string, 1)}
+  newArr.push(array[0])
+  if(options.separator){separer(options.separator, array)
+  } else {separer('+', array)}
+  return newArr.join('')
 };
-  
+//good
